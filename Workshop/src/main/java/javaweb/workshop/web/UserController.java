@@ -2,6 +2,7 @@ package javaweb.workshop.web;
 
 import javaweb.workshop.domain.binding.LoginUserBinding;
 import javaweb.workshop.domain.binding.RegisterUserBinding;
+import javaweb.workshop.domain.service.LoginUserService;
 import javaweb.workshop.domain.service.SetUserService;
 import javaweb.workshop.service.UserService;
 import org.modelmapper.ModelMapper;
@@ -68,8 +69,8 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("/login");
         } else {
-            SetUserService loginUserService = this.mapper.map(loginUserBinding, SetUserService.class);
-            if (this.userService.userExists(loginUserService)) {
+            LoginUserService loginUserService = this.mapper.map(loginUserBinding, LoginUserService.class);
+            if (this.userService.userIsRegistered(loginUserService)) {
                 modelAndView.setViewName("/home");
             } else {
                 modelAndView.setViewName("/login");

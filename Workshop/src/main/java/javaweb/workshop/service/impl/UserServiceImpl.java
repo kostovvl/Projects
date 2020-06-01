@@ -2,6 +2,7 @@ package javaweb.workshop.service.impl;
 
 import javaweb.workshop.domain.entity.Role;
 import javaweb.workshop.domain.entity.User;
+import javaweb.workshop.domain.service.LoginUserService;
 import javaweb.workshop.domain.service.SetRoleService;
 import javaweb.workshop.domain.service.SetUserService;
 import javaweb.workshop.repository.UserRepository;
@@ -39,4 +40,12 @@ public class UserServiceImpl implements UserService {
     public boolean userExists(SetUserService userService) {
         return this.userRepository.findByUsernameAndPassword(userService.getUsername(), userService.getPassword()) != null;
     }
+
+    @Override
+    public boolean userIsRegistered(LoginUserService loginUserService) {
+         return this.userRepository.findByUsernameAndPassword(loginUserService.getUsername(),
+                loginUserService.getPassword()) != null;
+    }
+
+
 }

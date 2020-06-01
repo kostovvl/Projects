@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -46,7 +46,7 @@
                 </div>
                 <div class="row mt-2">
                     <div class="col-12">
-                        <form action="/users/login" method="POST"
+                        <form th:action="@{/users/login}" th:method="POST"
                               class="tm-login-form">
 							  <div class="text-center">
 							  
