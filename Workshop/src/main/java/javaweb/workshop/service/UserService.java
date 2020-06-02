@@ -1,16 +1,14 @@
 package javaweb.workshop.service;
 
-import javaweb.workshop.domain.service.LoginUserService;
-import javaweb.workshop.domain.service.SetUserService;
+import javaweb.workshop.domain.servicemodel.LoginUserServiceModel;
+import javaweb.workshop.domain.servicemodel.SetUserServiceModel;
 
 public interface UserService {
 
-    void seedUser(SetUserService userService);
+    void seedUser(SetUserServiceModel setUserServiceModel);
 
-    boolean userExists(SetUserService userService);
+    boolean userExists(SetUserServiceModel setUserServiceModel);
 
-    boolean userIsRegistered(LoginUserService loginUserService);
-
-
+    boolean userExists(LoginUserServiceModel loginUserServiceModel);
 
 }

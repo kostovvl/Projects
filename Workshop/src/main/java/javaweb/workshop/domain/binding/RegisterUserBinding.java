@@ -18,7 +18,7 @@ public class RegisterUserBinding {
     }
 
     @NotNull
-    @Length(min = 3, max = 10, message = "Username length must be between 3 and 10 characters!")
+    @Length(min = 2, max = 10, message = "Username must be between 2 and 10 characters")
     public String getUsername() {
         return username;
     }
@@ -28,7 +28,7 @@ public class RegisterUserBinding {
     }
 
     @NotNull
-    @Length(min = 3, message = "Password length must be at least 2 characters long!")
+    @Length(min = 3, max = 10, message = "Password must be betweeen 3 and 10 characters")
     public String getPassword() {
         return password;
     }
@@ -47,7 +47,7 @@ public class RegisterUserBinding {
     }
 
     @NotNull
-    @Email
+  //  @Email
     public String getEmail() {
         return email;
     }
@@ -57,7 +57,7 @@ public class RegisterUserBinding {
     }
 
     @NotNull
-    @Pattern(regexp = "https:\\/github\\.com/.+\\/.+\\/")
+   // @Pattern(regexp = "https:\\/github\\.com/.+\\/.+\\/")
     public String getGit() {
         return git;
     }

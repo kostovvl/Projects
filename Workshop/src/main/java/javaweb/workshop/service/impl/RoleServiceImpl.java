@@ -1,7 +1,8 @@
+
 package javaweb.workshop.service.impl;
 
 import javaweb.workshop.domain.entity.Role;
-import javaweb.workshop.domain.service.SetRoleService;
+import javaweb.workshop.domain.servicemodel.SetRoleServiceModel;
 import javaweb.workshop.repository.RoleRepository;
 import javaweb.workshop.service.RoleService;
 import org.modelmapper.ModelMapper;
@@ -25,18 +26,17 @@ public class RoleServiceImpl implements RoleService {
     @PostConstruct
     public void init() {
         if (this.roleRepository.count() == 0) {
-            Role Admin = new Role("ADMIN");
-            Role User = new Role("USER");
+            Role admin = new Role("ADMIN");
+            Role user = new Role("USER");
 
-            this.roleRepository.saveAndFlush(Admin);
-            this.roleRepository.saveAndFlush(User);
+            this.roleRepository.saveAndFlush(admin);
+            this.roleRepository.saveAndFlush(user);
         }
     }
 
-    @Override
-    public SetRoleService setRole(String name) {
 
-        Role role = this.roleRepository.findByName(name);
-        return this.mapper.map(role, SetRoleService.class);
+    @Override
+    public SetRoleServiceModel getRole(String name) {
+        return this.mapper.map(this.roleRepository.findByName(name), SetRoleServiceModel.class);
     }
 }

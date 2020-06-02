@@ -1,10 +1,8 @@
 package javaweb.workshop.service.impl;
 
-import javaweb.workshop.domain.entity.Role;
 import javaweb.workshop.domain.entity.User;
-import javaweb.workshop.domain.service.LoginUserService;
-import javaweb.workshop.domain.service.SetRoleService;
-import javaweb.workshop.domain.service.SetUserService;
+import javaweb.workshop.domain.servicemodel.LoginUserServiceModel;
+import javaweb.workshop.domain.servicemodel.SetUserServiceModel;
 import javaweb.workshop.repository.UserRepository;
 import javaweb.workshop.service.RoleService;
 import javaweb.workshop.service.UserService;
@@ -27,25 +25,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void seedUser(SetUserService userService) {
+    public void seedUser(SetUserServiceModel setUserServiceModel) {
 
-        userService.setRole(this.roleService.setRole(
-                this.userRepository.count() == 0 ? "ADMIN" : "USER"));
+        setUserServiceModel.setRole(
+                this.roleService.getRole(this.userRepository.count() == 0? "ADMIN" : "USER")
+        );
 
-        this.userRepository.saveAndFlush(this.mapper.map(userService, User.class));
+        this.userRepository.saveAndFlush(this.mapper.map(setUserServiceModel, User.class));
 
     }
 
     @Override
-    public boolean userExists(SetUserService userService) {
-        return this.userRepository.findByUsernameAndPassword(userService.getUsername(), userService.getPassword()) != null;
+    public boolean userExists(SetUserServiceModel setUserServiceModel) {
+        return this.userRepository.findByUsernameAndPassword(
+                setUserServiceModel.getUsername(), setUserServiceModel.getPassword()
+        ) != null;
     }
 
     @Override
-    public boolean userIsRegistered(LoginUserService loginUserService) {
-         return this.userRepository.findByUsernameAndPassword(loginUserService.getUsername(),
-                loginUserService.getPassword()) != null;
+    public boolean userExists(LoginUserServiceModel loginUserServiceModel) {
+        return this.userRepository.findByUsernameAndPassword(
+                loginUserServiceModel.getUsername(), loginUserServiceModel.getPassword()
+        ) != null;
     }
-
-
 }

@@ -1,10 +1,10 @@
-package javaweb.workshop.domain.service;
+package javaweb.workshop.domain.servicemodel;
 
-public class SetRoleService extends BaseService {
+public class SetRoleServiceModel extends BaseServiceModel {
 
     private String name;
 
-    public SetRoleService() {
+    public SetRoleServiceModel() {
     }
 
     public String getName() {

@@ -2,8 +2,8 @@ package javaweb.workshop.web;
 
 import javaweb.workshop.domain.binding.LoginUserBinding;
 import javaweb.workshop.domain.binding.RegisterUserBinding;
-import javaweb.workshop.domain.service.LoginUserService;
-import javaweb.workshop.domain.service.SetUserService;
+import javaweb.workshop.domain.servicemodel.LoginUserServiceModel;
+import javaweb.workshop.domain.servicemodel.SetUserServiceModel;
 import javaweb.workshop.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,6 @@ public class UserController {
 
     private final UserService userService;
     private final ModelMapper mapper;
-
     @Autowired
     public UserController(UserService userService, ModelMapper mapper) {
         this.userService = userService;
@@ -31,32 +30,44 @@ public class UserController {
     }
 
     @GetMapping("/register")
-    public String getRegisterPage() {
-        return "register";
+    public ModelAndView getRegisterPage(ModelAndView modelAndView) {
+
+        modelAndView.setViewName("/register");
+
+        return modelAndView;
     }
 
     @GetMapping("/login")
-    public String getLoginPage() {
-        return "login";
+    public ModelAndView getLoginPage(ModelAndView modelAndView) {
+
+        modelAndView.setViewName("/login");
+
+        return modelAndView;
     }
 
     @PostMapping("/register")
-    public ModelAndView registerUser(@Valid @ModelAttribute("userRegisterAttribute")
-                                             RegisterUserBinding registerUserBinding,
+    public ModelAndView registerUser(@Valid @ModelAttribute("registerUser")
+                                     RegisterUserBinding registerUserBinding,
                                      BindingResult bindingResult, ModelAndView modelAndView) {
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("/register");
-        } else if (!registerUserBinding.getPassword().equals(registerUserBinding.getConfirmPassword())) {
-
-            modelAndView.setViewName("/register");
-
         } else {
-            SetUserService setUserService = this.mapper.map(registerUserBinding, SetUserService.class);
-            if (this.userService.userExists(setUserService)) {
+            if (!registerUserBinding.getPassword().equals(registerUserBinding.getConfirmPassword())) {
                 modelAndView.setViewName("/register");
             } else {
-                this.userService.seedUser(setUserService);
-                modelAndView.setViewName("/home");
+                SetUserServiceModel setUserServiceModel = this.mapper.map(registerUserBinding, SetUserServiceModel.class);
+
+                if (this.userService.userExists(setUserServiceModel)) {
+
+                    modelAndView.setViewName("/register");
+
+                } else {
+
+                    this.userService.seedUser(setUserServiceModel);
+                    modelAndView.setViewName("/home");
+
+                }
+
             }
         }
 
@@ -64,20 +75,29 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ModelAndView loginUser(@Valid @ModelAttribute("userLoginAttribute") LoginUserBinding loginUserBinding,
-                                  BindingResult bindingResult, ModelAndView modelAndView){
-        if (bindingResult.hasErrors()) {
-            modelAndView.setViewName("/login");
-        } else {
-            LoginUserService loginUserService = this.mapper.map(loginUserBinding, LoginUserService.class);
-            if (this.userService.userIsRegistered(loginUserService)) {
-                modelAndView.setViewName("/home");
-            } else {
-                modelAndView.setViewName("/login");
-            }
-        }
+    public ModelAndView loginUser(@Valid @ModelAttribute("loginUserAttribute")
+                                              LoginUserBinding loginUserBinding,
+                                  BindingResult bindingResult, ModelAndView modelAndView) {
 
+        if (bindingResult.hasErrors()) {
+
+            modelAndView.setViewName("/login");
+
+        } else {
+            LoginUserServiceModel loginUserServiceModel = this.mapper.map(loginUserBinding, LoginUserServiceModel.class);
+            if (this.userService.userExists(loginUserServiceModel)) {
+
+                modelAndView.setViewName("/home");
+
+            } else {
+
+                modelAndView.setViewName("/login");
+
+            }
+
+        }
 
         return modelAndView;
     }
+
 }

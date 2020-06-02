@@ -1,14 +1,16 @@
-package javaweb.workshop.domain.service;
+package javaweb.workshop.domain.servicemodel;
 
-public class SetUserService extends BaseService {
+import javaweb.workshop.domain.entity.Role;
+
+public class SetUserServiceModel extends BaseServiceModel {
 
     private String username;
     private String password;
     private String email;
     private String git;
-    private SetRoleService role;
+    private SetRoleServiceModel role;
 
-    public SetUserService() {
+    public SetUserServiceModel() {
     }
 
     public String getUsername() {
@@ -43,11 +45,11 @@ public class SetUserService extends BaseService {
         this.git = git;
     }
 
-    public SetRoleService getRole() {
+    public SetRoleServiceModel getRole() {
         return role;
     }
 
-    public void setRole(SetRoleService role) {
+    public void setRole(SetRoleServiceModel role) {
         this.role = role;
     }
 }

@@ -1,11 +1,11 @@
-package javaweb.workshop.domain.service;
+package javaweb.workshop.domain.servicemodel;
 
-public class LoginUserService extends BaseService {
+public class LoginUserServiceModel extends BaseServiceModel {
 
     private String username;
     private String password;
 
-    public LoginUserService() {
+    public LoginUserServiceModel() {
     }
 
     public String getUsername() {

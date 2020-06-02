@@ -1,10 +1,10 @@
-package javaweb.workshop.domain.service;
+package javaweb.workshop.domain.servicemodel;
 
-public abstract class BaseService {
+public abstract class BaseServiceModel {
 
     private String id;
 
-    public BaseService() {
+    public BaseServiceModel() {
     }
 
     public String getId() {

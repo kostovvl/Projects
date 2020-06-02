@@ -1,9 +1,9 @@
 package javaweb.workshop.service;
 
-import javaweb.workshop.domain.service.SetRoleService;
+import javaweb.workshop.domain.servicemodel.SetRoleServiceModel;
 
 public interface RoleService {
 
-    SetRoleService setRole(String name);
+    public SetRoleServiceModel getRole (String name);
 
 }
