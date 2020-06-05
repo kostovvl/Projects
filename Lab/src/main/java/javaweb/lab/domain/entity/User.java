@@ -65,9 +65,7 @@ public class User extends BaseEntity {
         return role;
     }
 
-    public void setRole(UserRole role) {
-        this.role = role;
-    }
+    public void setRole(UserRole role) {this.role = role;}
 
     @Column(name = "image_URL")
     public String getImageUrl() {
@@ -105,4 +103,6 @@ public class User extends BaseEntity {
     public void setOffers(Set<Offer> offers) {
         this.offers = offers;
     }
+
+
 }

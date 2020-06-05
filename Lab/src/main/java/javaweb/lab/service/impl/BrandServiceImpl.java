@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashSet;
 
 @Service
 public class BrandServiceImpl implements BrandService {
@@ -28,11 +29,14 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public void createBrand(BrandDto brandDto) throws EntityExistsException {
 
+        Brand test = this.brandRepository.findByName(brandDto.getName());
         if (this.brandRepository.findByName(brandDto.getName()) != null) {
             throw new EntityExistsException();
         }
+        Brand brand = this.mapper.map(brandDto, Brand.class);
+        brand.setCreated(new Date());
 
-        this.brandRepository.saveAndFlush(this.mapper.map(brandDto, Brand.class));
+        this.brandRepository.saveAndFlush(brand);
     }
 
     @Override

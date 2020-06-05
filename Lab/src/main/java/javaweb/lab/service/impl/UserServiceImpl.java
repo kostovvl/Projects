@@ -33,6 +33,7 @@ public class UserServiceImpl implements UserService {
         this.mapper = mapper;
     }
 
+
     @Transactional
     @Override
     public void addUser(UserAddDto userAddDto) throws EntityExistsException {
@@ -41,6 +42,7 @@ public class UserServiceImpl implements UserService {
             throw new EntityExistsException();
         } else {
 
+
             if (this.userRepository.count() == 0) {
                 UserRoleDto admin = this.userRoleService.getRole("ADMIN");
                 userAddDto.setRole(admin);
@@ -48,12 +50,11 @@ public class UserServiceImpl implements UserService {
                 UserRoleDto seller = this.userRoleService.getRole("SELLER");
                 userAddDto.setRole(seller);
             }
-            System.out.println();
+
             User newUser = this.mapper.map(userAddDto, User.class);
             newUser.setActive(true);
             newUser.setCreated(new Date());
             this.userRepository.saveAndFlush(newUser);
-            System.out.println();
 
         }
 
@@ -94,7 +95,13 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.count();
     }
 
+
+
     private User findByUsername(String username) {
        return this.userRepository.findByUsername(username).orElse(null);
     }
+
+
+
+
 }

@@ -4,6 +4,7 @@ package javaweb.lab.domain.entity;
 import javax.persistence.*;
 import java.util.Set;
 
+
 @Entity
 @Table(name = "user_roles")
 public class UserRole extends BaseEntity {
@@ -11,6 +12,7 @@ public class UserRole extends BaseEntity {
 
     private Role role;
     private Set<User> users;
+
 
     public UserRole() {
     }
