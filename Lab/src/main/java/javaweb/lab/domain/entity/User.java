@@ -14,7 +14,7 @@ public class User extends BaseEntity {
     private String firstName;
     private String lastName;
     private boolean active;
-    private Set<UserRole> role;
+    private UserRole role;
     private String imageUrl;
     private Date created;
     private Date modified;
@@ -59,13 +59,13 @@ public class User extends BaseEntity {
         this.active = active;
     }
 
-    @ManyToMany(mappedBy = "users", targetEntity = UserRole.class,
-    fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    public Set<UserRole> getRole() {
+    @ManyToOne()
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    public UserRole getRole() {
         return role;
     }
 
-    public void setRole(Set<UserRole> role) {
+    public void setRole(UserRole role) {
         this.role = role;
     }
 

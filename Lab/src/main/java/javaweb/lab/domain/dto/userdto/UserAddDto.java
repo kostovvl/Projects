@@ -1,10 +1,13 @@
 package javaweb.lab.domain.dto.userdto;
 
 import javaweb.lab.domain.dto.BaseDto;
+import javaweb.lab.domain.dto.UserRoleDto;
+import javaweb.lab.domain.entity.Role;
 import javaweb.lab.domain.entity.UserRole;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 public class UserAddDto extends BaseDto {
@@ -13,7 +16,7 @@ public class UserAddDto extends BaseDto {
     private String firstName;
     private String lastName;
     private boolean active;
-    private Set<UserRole> role;
+    private UserRoleDto role;
     private String imageUrl;
     private Date created;
     private Date modified;
@@ -53,11 +56,11 @@ public class UserAddDto extends BaseDto {
         this.active = active;
     }
 
-    public Set<UserRole> getRole() {
+    public UserRoleDto getRole() {
         return role;
     }
 
-    public void setRole(Set<UserRole> role) {
+    public void setRole(UserRoleDto role) {
         this.role = role;
     }
 
@@ -85,7 +88,5 @@ public class UserAddDto extends BaseDto {
         this.modified = modified;
     }
 
-    public void addRole(UserRole role) {
-        this.role.add(role);
-    }
+
 }

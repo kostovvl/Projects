@@ -27,9 +27,11 @@ public class UserRoleServiceImpl implements UserRoleService {
         if (this.userRoleRepository.count() == 0) {
             UserRole admin = new UserRole("ADMIN");
             UserRole user = new UserRole("USER");
+            UserRole seller = new UserRole("SELLER");
 
             this.userRoleRepository.saveAndFlush(admin);
             this.userRoleRepository.saveAndFlush(user);
+            this.userRoleRepository.saveAndFlush(seller);
         }
     }
 

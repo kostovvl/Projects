@@ -1,5 +1,6 @@
 package javaweb.lab.service.impl;
 
+import javaweb.lab.domain.dto.UserRoleDto;
 import javaweb.lab.domain.dto.userdto.UserAddDto;
 import javaweb.lab.domain.dto.userdto.UserRemoveDto;
 import javaweb.lab.domain.dto.userdto.UserUpdateDto;
@@ -15,6 +16,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Date;
 
 @Service
@@ -31,6 +33,7 @@ public class UserServiceImpl implements UserService {
         this.mapper = mapper;
     }
 
+    @Transactional
     @Override
     public void addUser(UserAddDto userAddDto) throws EntityExistsException {
 
@@ -39,12 +42,18 @@ public class UserServiceImpl implements UserService {
         } else {
 
             if (this.userRepository.count() == 0) {
-                UserRole admin = new UserRole("ADMIN");
-                userAddDto.addRole(admin);
+                UserRoleDto admin = this.userRoleService.getRole("ADMIN");
+                userAddDto.setRole(admin);
+            } else {
+                UserRoleDto seller = this.userRoleService.getRole("SELLER");
+                userAddDto.setRole(seller);
             }
+            System.out.println();
             User newUser = this.mapper.map(userAddDto, User.class);
             newUser.setActive(true);
+            newUser.setCreated(new Date());
             this.userRepository.saveAndFlush(newUser);
+            System.out.println();
 
         }
 
@@ -57,7 +66,7 @@ public class UserServiceImpl implements UserService {
             throw new EntityDoesNotExistsException();
         }
 
-        User forDeletion = this.userRepository.findByUsername(userRemoveDto.getUsername());
+        User forDeletion = findByUsername(userRemoveDto.getUsername());
         this.userRepository.deleteById(forDeletion.getId());
 
     }
@@ -69,7 +78,7 @@ public class UserServiceImpl implements UserService {
             throw new EntityInvalidException();
         }
 
-        User toBeUpdated = this.userRepository.findByUsername(userUpdateDto.getUsername());
+        User toBeUpdated = findByUsername(userUpdateDto.getUsername());
         toBeUpdated.setFirstName(userUpdateDto.getFirstName());
         toBeUpdated.setLastName(userUpdateDto.getLastName());
         toBeUpdated.setRole(userUpdateDto.getRole());
@@ -86,6 +95,6 @@ public class UserServiceImpl implements UserService {
     }
 
     private User findByUsername(String username) {
-       return this.userRepository.findByUsername(username);
+       return this.userRepository.findByUsername(username).orElse(null);
     }
 }

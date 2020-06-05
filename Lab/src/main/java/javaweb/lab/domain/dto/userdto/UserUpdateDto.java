@@ -11,7 +11,7 @@ public class UserUpdateDto extends BaseDto {
     private String firstName;
     private String lastName;
     private boolean active;
-    private Set<UserRole> role;
+    private UserRole role;
     private String imageUrl;
 
 
@@ -50,11 +50,11 @@ public class UserUpdateDto extends BaseDto {
         this.active = active;
     }
 
-    public Set<UserRole> getRole() {
+    public UserRole getRole() {
         return role;
     }
 
-    public void setRole(Set<UserRole> role) {
+    public void setRole(UserRole role) {
         this.role = role;
     }
 
