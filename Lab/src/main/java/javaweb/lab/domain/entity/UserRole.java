@@ -28,8 +28,10 @@ public class UserRole extends BaseEntity {
         this.role = role;
     }
 
-    @OneToMany(mappedBy = "role", targetEntity = User.class,
-    fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany()
+    @JoinTable(name = "user_roles_users",
+    joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "user_role_id", referencedColumnName = "id"))
     public Set<User> getUsers() {
         return users;
     }

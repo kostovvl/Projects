@@ -1,5 +1,7 @@
 package javaweb.lab.service.impl;
 
+import javaweb.lab.domain.dto.UserRoleDto;
+import javaweb.lab.domain.entity.Role;
 import javaweb.lab.domain.entity.UserRole;
 import javaweb.lab.repository.UserRoleRepository;
 import javaweb.lab.service.UserRoleService;
@@ -29,5 +31,10 @@ public class UserRoleServiceImpl implements UserRoleService {
             this.userRoleRepository.saveAndFlush(admin);
             this.userRoleRepository.saveAndFlush(user);
         }
+    }
+
+    @Override
+    public UserRoleDto getRole(String role) {
+        return this.mapper.map(this.userRoleRepository.findByRole(Role.valueOf(role)), UserRoleDto.class);
     }
 }

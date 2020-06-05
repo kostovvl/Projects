@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
     <meta charset="UTF-8"/>
     <title>West Compass</title>
@@ -13,7 +13,7 @@
         <a class="nav-link text-white active h5" href="/">Home</a>
         <a class="nav-link text-white active h5" href="/users/register">Register Seller</a>
         <div class="collapse navbar-collapse d-flex justify-content-end">
-             <ul class="navbar-nav row">
+            <ul class="navbar-nav row">
                 <li class="nav-item col-md-3">
                     <a class="nav-link text-white active font-weight-bold" href="/">Add Brand</a>
                 </li>
@@ -31,17 +31,26 @@
         </div>
     </nav>
     <div class="container-fluid">
-        <h2 class="text-center text-white ">West Compass Dealer Shop</h2>
-        <hr style="width: 50%"/>
-        <h4 class="font-italic text-center text-white ">
-            By clicking the buttons below you can check our car deals or upload a
-            brand new.
-        </h4>
-        <br/>
-        <div class="text-center">
-            <a class="btn btn-secondary text-center mr-4" href="/">Upload Offer</a>
-            <a class="btn btn-secondary text-center ml-4" href="/">All Offers</a>
-        </div>
+        <h2 class="text-center text-white">Add Brand</h2>
+        <form class="mt-lg-5 w-15 h-50" action="/" method="">
+            <div class="col col-md-12">
+                <div class="form-group">
+                    <div class="label-holder d-flex justify-content-center">
+                        <label class="text-center text-white font-weight-bold" for="year">Enter Brand Name
+                            <input type="text" class="form-control" placeholder="Brand name" name="name" id="name">
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-md-4"></div>
+                <div class="col col-md-4">
+                    <div class="button-holder d-flex justify-content-center">
+                        <input type="submit" class="btn btn-secondary" value="Add Brand"/>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 </main>
 </body>

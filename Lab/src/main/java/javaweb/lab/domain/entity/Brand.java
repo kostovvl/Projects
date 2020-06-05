@@ -2,6 +2,7 @@ package javaweb.lab.domain.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -9,8 +10,8 @@ import java.util.Set;
 public class Brand extends BaseEntity {
 
     private String name;
-    private LocalDateTime created;
-    private LocalDateTime modified;
+    private Date created;
+    private Date modified;
     private Set<Model> models;
 
     public Brand() {
@@ -26,20 +27,20 @@ public class Brand extends BaseEntity {
     }
 
     @Column(name = "created")
-    public LocalDateTime getCreated() {
+    public Date getCreated() {
         return created;
     }
 
-    public void setCreated(LocalDateTime created) {
+    public void setCreated(Date created) {
         this.created = created;
     }
 
     @Column(name = "modified")
-    public LocalDateTime getModified() {
+    public Date getModified() {
         return modified;
     }
 
-    public void setModified(LocalDateTime modified) {
+    public void setModified(Date modified) {
         this.modified = modified;
     }
 

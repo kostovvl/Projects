@@ -1,14 +1,13 @@
-package javaweb.lab.domain.entity;
+package javaweb.lab.domain.dto.userdto;
 
-import javax.persistence.*;
+import javaweb.lab.domain.dto.BaseDto;
+import javaweb.lab.domain.entity.UserRole;
+
 import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
-@Entity
-@Table(name = "users")
-public class User extends BaseEntity {
+public class UserAddDto extends BaseDto {
 
     private String username;
     private String firstName;
@@ -18,12 +17,10 @@ public class User extends BaseEntity {
     private String imageUrl;
     private Date created;
     private Date modified;
-    private Set<Offer> offers;
 
-    public User() {
+    public UserAddDto() {
     }
 
-    @Column(name = "username")
     public String getUsername() {
         return username;
     }
@@ -32,7 +29,6 @@ public class User extends BaseEntity {
         this.username = username;
     }
 
-    @Column(name = "first_name")
     public String getFirstName() {
         return firstName;
     }
@@ -41,7 +37,6 @@ public class User extends BaseEntity {
         this.firstName = firstName;
     }
 
-    @Column(name = "last_name")
     public String getLastName() {
         return lastName;
     }
@@ -50,7 +45,6 @@ public class User extends BaseEntity {
         this.lastName = lastName;
     }
 
-    @Column(name = "is_active")
     public boolean isActive() {
         return active;
     }
@@ -59,8 +53,6 @@ public class User extends BaseEntity {
         this.active = active;
     }
 
-    @ManyToMany(mappedBy = "users", targetEntity = UserRole.class,
-    fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public Set<UserRole> getRole() {
         return role;
     }
@@ -69,7 +61,6 @@ public class User extends BaseEntity {
         this.role = role;
     }
 
-    @Column(name = "image_URL")
     public String getImageUrl() {
         return imageUrl;
     }
@@ -78,7 +69,6 @@ public class User extends BaseEntity {
         this.imageUrl = imageUrl;
     }
 
-    @Column(name = "created")
     public Date getCreated() {
         return created;
     }
@@ -87,7 +77,6 @@ public class User extends BaseEntity {
         this.created = created;
     }
 
-    @Column(name = "modified")
     public Date getModified() {
         return modified;
     }
@@ -96,13 +85,7 @@ public class User extends BaseEntity {
         this.modified = modified;
     }
 
-    @OneToMany(mappedBy = "seller", targetEntity = Offer.class,
-    fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    public Set<Offer> getOffers() {
-        return offers;
-    }
-
-    public void setOffers(Set<Offer> offers) {
-        this.offers = offers;
+    public void addRole(UserRole role) {
+        this.role.add(role);
     }
 }

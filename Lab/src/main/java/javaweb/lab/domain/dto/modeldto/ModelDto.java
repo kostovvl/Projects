@@ -1,13 +1,12 @@
-package javaweb.lab.domain.entity;
+package javaweb.lab.domain.dto.modeldto;
 
-import javax.persistence.*;
-import java.time.LocalDateTime;
+import javaweb.lab.domain.dto.BaseDto;
+import javaweb.lab.domain.entity.Brand;
+import javaweb.lab.domain.entity.Type;
+
 import java.util.Date;
-import java.util.Set;
 
-@Entity
-@Table(name = "models")
-public class Model extends BaseEntity {
+public class ModelDto extends BaseDto {
 
     private String name;
     private String imageUrl;
@@ -15,14 +14,12 @@ public class Model extends BaseEntity {
     private int endYear;
     private Date created;
     private Date modified;
-    private Brand brand;
+    private String brand;
     private Type type;
-    private Set<Offer> offers;
 
-    public Model() {
+    public ModelDto() {
     }
 
-    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -31,7 +28,6 @@ public class Model extends BaseEntity {
         this.name = name;
     }
 
-    @Column(name = "image_url")
     public String getImageUrl() {
         return imageUrl;
     }
@@ -40,7 +36,6 @@ public class Model extends BaseEntity {
         this.imageUrl = imageUrl;
     }
 
-    @Column(name = "start_year")
     public int getStartYear() {
         return startYear;
     }
@@ -49,7 +44,6 @@ public class Model extends BaseEntity {
         this.startYear = startYear;
     }
 
-    @Column(name = "end_year")
     public int getEndYear() {
         return endYear;
     }
@@ -58,7 +52,6 @@ public class Model extends BaseEntity {
         this.endYear = endYear;
     }
 
-    @Column(name = "created")
     public Date getCreated() {
         return created;
     }
@@ -67,7 +60,6 @@ public class Model extends BaseEntity {
         this.created = created;
     }
 
-    @Column(name = "modified")
     public Date getModified() {
         return modified;
     }
@@ -76,32 +68,19 @@ public class Model extends BaseEntity {
         this.modified = modified;
     }
 
-    @Enumerated(EnumType.STRING)
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
     public Type getType() {
         return type;
     }
 
     public void setType(Type type) {
         this.type = type;
-    }
-
-    @ManyToOne()
-    @JoinColumn(name = "brand_id", referencedColumnName = "id")
-    public Brand getBrand() {
-        return brand;
-    }
-
-    public void setBrand(Brand brand) {
-        this.brand = brand;
-    }
-
-    @OneToMany(mappedBy = "model", targetEntity = Offer.class,
-    fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    public Set<Offer> getOffers() {
-        return offers;
-    }
-
-    public void setOffers(Set<Offer> offers) {
-        this.offers = offers;
     }
 }
