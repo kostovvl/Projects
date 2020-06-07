@@ -14,6 +14,10 @@ public class BrandDto extends BaseDto {
     public BrandDto() {
     }
 
+    public BrandDto(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }

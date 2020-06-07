@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.HashSet;
+
 
 @Service
 public class BrandServiceImpl implements BrandService {
@@ -66,6 +66,11 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public BrandDto getBrand(String name) {
+        Brand result = this.brandRepository.findByName(name);
+
+        if (result == null) {
+            return new BrandDto();
+        }
         return this.mapper.map(this.brandRepository.findByName(name), BrandDto.class);
     }
 

@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ModelServiceImpl implements ModelService {
@@ -38,16 +40,18 @@ public class ModelServiceImpl implements ModelService {
         if (this.modelRepository.findByName(modelDto.getName()) != null) {
             throw new EntityExistsException();
         }
-        Model newModel = this.mapper.map(modelDto, Model.class);
-        BrandDto brandDto = this.brandService.getBrand(modelDto.getBrand());
 
-        if (brandDto == null) {
-            brandDto = new BrandDto();
-            brandDto.setName(modelDto.getBrand());
-            brandDto.setCreated(new Date());
-            this.brandService.createBrand(brandDto);
+
+
+        if (this.brandService.getBrand(modelDto.getBrand()).getName() == null) {
+            BrandDto  newBrandDto = new BrandDto();
+            newBrandDto.setName(modelDto.getBrand());
+            newBrandDto.setCreated(new Date());
+            this.brandService.createBrand(newBrandDto);
         }
-        newModel.setBrand(this.mapper.map(brandDto, Brand.class));
+
+        Model newModel = this.mapper.map(modelDto, Model.class);
+        newModel.setBrand(this.mapper.map(this.brandService.getBrand(modelDto.getBrand()), Brand.class));
 
         this.modelRepository.saveAndFlush(newModel);
     }
@@ -80,5 +84,12 @@ public class ModelServiceImpl implements ModelService {
     @Override
     public long getCount() {
         return this.modelRepository.count();
+    }
+
+    @Override
+    public List<ModelDto> getAllModels() {
+        return this.modelRepository.selectAllModels().stream()
+                .map(m -> this.mapper.map(m, ModelDto.class))
+                .collect(Collectors.toList());
     }
 }

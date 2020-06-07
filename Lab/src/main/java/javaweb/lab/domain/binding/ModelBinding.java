@@ -1,24 +1,15 @@
-package javaweb.lab.domain.dto.modeldto;
+package javaweb.lab.domain.binding;
 
-import javaweb.lab.domain.binding.BrandBinding;
-import javaweb.lab.domain.dto.BaseDto;
-import javaweb.lab.domain.dto.branddto.BrandDto;
-import javaweb.lab.domain.entity.Type;
-
-import java.util.Date;
-
-public class ModelDto extends BaseDto {
+public class ModelBinding {
 
     private String name;
     private String imageUrl;
     private int startYear;
     private int endYear;
-    private Date created;
-    private Date modified;
     private String brand;
-    private Type type;
 
-    public ModelDto() {
+
+    public ModelBinding() {
     }
 
     public String getName() {
@@ -53,21 +44,6 @@ public class ModelDto extends BaseDto {
         this.endYear = endYear;
     }
 
-    public Date getCreated() {
-        return created;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    public Date getModified() {
-        return modified;
-    }
-
-    public void setModified(Date modified) {
-        this.modified = modified;
-    }
 
     public String getBrand() {
         return brand;
@@ -75,13 +51,5 @@ public class ModelDto extends BaseDto {
 
     public void setBrand(String brand) {
         this.brand = brand;
-    }
-
-    public Type getType() {
-        return type;
-    }
-
-    public void setType(Type type) {
-        this.type = type;
     }
 }
