@@ -2,6 +2,7 @@ package springfundamentals.lab.domain.binding;
 
 import springfundamentals.lab.domain.entity.Brand;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class ModelBinding {
@@ -15,6 +16,7 @@ public class ModelBinding {
     public ModelBinding() {
     }
 
+    @NotNull
     public String getName() {
         return name;
     }
@@ -47,6 +49,7 @@ public class ModelBinding {
         this.endYear = endYear;
     }
 
+    @NotNull
     public String getBrand() {
         return brand;
     }

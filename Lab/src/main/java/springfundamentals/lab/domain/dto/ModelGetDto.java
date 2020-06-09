@@ -12,7 +12,7 @@ public class ModelGetDto extends BaseDto {
     private int endYear;
     private Date created;
     private Date modified;
-    private Brand brand;
+    private BrandGetDto brand;
 
     public ModelGetDto() {
     }
@@ -65,11 +65,11 @@ public class ModelGetDto extends BaseDto {
         this.modified = modified;
     }
 
-    public Brand getBrand() {
+    public BrandGetDto getBrand() {
         return brand;
     }
 
-    public void setBrand(Brand brand) {
+    public void setBrand(BrandGetDto brand) {
         this.brand = brand;
     }
 }

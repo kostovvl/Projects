@@ -1,28 +1,40 @@
-package springfundamentals.lab.domain.dto;
-
-import springfundamentals.lab.domain.entity.*;
+package springfundamentals.lab.domain.view;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
-public class OfferGetDto extends BaseDto {
+public class OfferView {
 
+    private long id;
+    private String brand;
     private String description;
-    private Engine engine;
+    private String engine;
     private String imageUrl;
     private int mileage;
     private BigDecimal price;
-    private Transmission transmission;
+    private String transmission;
     private int year;
-    private Date created;
-    private Date modified;
-    private Category category;
-    private ModelGetDto model;
-    private UserGetDto seller;
+    private String category;
+    private String model;
+    private String seller;
 
-    public OfferGetDto() {
+    public OfferView() {
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
 
     public String getDescription() {
         return description;
@@ -32,11 +44,11 @@ public class OfferGetDto extends BaseDto {
         this.description = description;
     }
 
-    public Engine getEngine() {
+    public String getEngine() {
         return engine;
     }
 
-    public void setEngine(Engine engine) {
+    public void setEngine(String engine) {
         this.engine = engine;
     }
 
@@ -64,11 +76,11 @@ public class OfferGetDto extends BaseDto {
         this.price = price;
     }
 
-    public Transmission getTransmission() {
+    public String getTransmission() {
         return transmission;
     }
 
-    public void setTransmission(Transmission transmission) {
+    public void setTransmission(String transmission) {
         this.transmission = transmission;
     }
 
@@ -80,43 +92,27 @@ public class OfferGetDto extends BaseDto {
         this.year = year;
     }
 
-    public Date getCreated() {
-        return created;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    public Date getModified() {
-        return modified;
-    }
-
-    public void setModified(Date modified) {
-        this.modified = modified;
-    }
-
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 
-    public ModelGetDto getModel() {
+    public String getModel() {
         return model;
     }
 
-    public void setModel(ModelGetDto model) {
+    public void setModel(String model) {
         this.model = model;
     }
 
-    public UserGetDto getSeller() {
+    public String getSeller() {
         return seller;
     }
 
-    public void setSeller(UserGetDto seller) {
+    public void setSeller(String seller) {
         this.seller = seller;
     }
 }

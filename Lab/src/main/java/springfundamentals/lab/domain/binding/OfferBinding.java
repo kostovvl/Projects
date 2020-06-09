@@ -2,8 +2,9 @@ package springfundamentals.lab.domain.binding;
 
 import springfundamentals.lab.domain.entity.*;
 
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.util.Date;
+
 
 public class OfferBinding {
 
@@ -21,6 +22,7 @@ public class OfferBinding {
     public OfferBinding() {
     }
 
+    @NotNull
     public String getDescription() {
         return description;
     }
@@ -85,6 +87,7 @@ public class OfferBinding {
         this.category = category;
     }
 
+    @NotNull
     public String getModel() {
         return model;
     }
@@ -93,6 +96,7 @@ public class OfferBinding {
         this.model = model;
     }
 
+    @NotNull
     public String getSeller() {
         return seller;
     }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <title>West Compass</title>
@@ -41,17 +41,17 @@
                 <div class="row">
                     <div class="col">
                         <h2>Car Info:</h2>
-                        <h4>Car brand</h4>
-                        <h4>Car model</h4>
-                        <h4>Car year</h4>
-                        <h4>Engine</h4>
-                        <h4>Transmission</h4>
+                        <h4 th:text="${offer.getModel().getBrand().getName()}"></h4>
+                        <h4 th:text="${offer.getModel().getName()}"></h4>
+                        <h4 th:text="${offer.getYear()}"></h4>
+                        <h4 th:text="${offer.getEngine()}">Engine</h4>
+                        <h4 th:text="${offer.getTransmission()}">Transmission</h4>
                     </div>
                     <div class="col">
                         <h2>Offer Info:</h2>
-                        <h4>Seller username</h4>
-                        <h4>Price</h4>
-                        <h4>Modified</h4>
+                        <h4 th:text="${offer.getSeller.getUsername}"></h4>
+                        <h4 th:text="${offer.getPrice()}"></h4>
+                        <h4 th:text="${offer.getModified()}"></h4>
                     </div>
                 </div>
 
@@ -59,11 +59,12 @@
                         <label for="description">Description</label>
                         <br>
                         <textarea class="bg-dark text-white" name="description" id="description"
-                                  disabled >Offer description</textarea>
+                                  th:text="${offer.getDescription()}" >Offer description</textarea>
 
                 </div>
 
-                <h4><a class="btn-outline-danger" href="/cars/delete/id">Delete</a></h4>
+                <h4><a class="btn-outline-danger"
+                       th:href="@{/cars/delete/id (id = ${offer.getModel().getId()})}">Delete</a></h4>
             </div>
 
 

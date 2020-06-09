@@ -19,7 +19,7 @@ public class User extends BaseEntity {
     public User() {
     }
 
-    @Column(name = "username")
+    @Column(name = "username", unique = true, nullable = false)
     public String getUsername() {
         return username;
     }
@@ -28,7 +28,7 @@ public class User extends BaseEntity {
         this.username = username;
     }
 
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false)
     public String getFirstName() {
         return firstName;
     }
@@ -37,7 +37,7 @@ public class User extends BaseEntity {
         this.firstName = firstName;
     }
 
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false)
     public String getLastName() {
         return lastName;
     }

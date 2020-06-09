@@ -24,7 +24,7 @@ public class Offer extends BaseEntity {
     public Offer() {
     }
 
-    @Column(name = "description")
+    @Column(name = "description", nullable = false)
     public String getDescription() {
         return description;
     }

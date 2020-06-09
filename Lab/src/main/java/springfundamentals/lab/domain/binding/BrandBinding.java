@@ -1,5 +1,7 @@
 package springfundamentals.lab.domain.binding;
 
+import javax.validation.constraints.NotNull;
+
 public class BrandBinding {
 
     private String name;
@@ -7,6 +9,7 @@ public class BrandBinding {
     public BrandBinding() {
     }
 
+    @NotNull()
     public String getName() {
         return name;
     }

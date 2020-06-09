@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <title>West Compass</title>
@@ -34,21 +34,14 @@
         <h2 class="text-center text-white mt-5">West Compass Offers</h2>
         <hr style="width: 50%"/>
         <div class='row mb-4 d-flex justify-content-around'>
- 
+
+            <th:block th:each="o:${offers}">
             <div class="col-md-4 d-flex flex-column bg-text mb-3">
-                <h2>Car brand: ...</h2>
-                <h4>Model: ....</h4>
-               <h4>Year: ...</h4>
-               <h4>Engine: ...</h4>
-                <h4><a class="btn-block" href="/cars/id">Details</a></h4>
-            </div>
-			
-			<div class="col-md-4 d-flex flex-column bg-text mb-3">
-                <h2>Car brand: ...</h2>
-                <h4>Model: ....</h4>
-               <h4>Year: ...</h4>
-               <h4>Engine: ...</h4>
-                <h4><a class="btn-block" href="/cars/id">Details</a></h4>
+                <h2 th:text="${o.getBrand()}"></h2>
+                <h4 th:text="${o.getModel()}"></h4>
+               <h4 th:text="${o.getYear()}"></h4>
+               <h4 th:text="${o.getEngine()}">Engine: ...</h4>
+                <h4><a class="btn-block" th:href="@{/cars/details/{id} (id = ${o.getId()})}">Details</a></h4>
             </div>
 
         </div>

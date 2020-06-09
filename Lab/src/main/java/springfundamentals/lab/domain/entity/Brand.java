@@ -16,7 +16,7 @@ public class Brand extends BaseEntity {
     public Brand() {
     }
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, unique = true)
     public String getName() {
         return name;
     }

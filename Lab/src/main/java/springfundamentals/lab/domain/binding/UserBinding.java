@@ -2,6 +2,8 @@ package springfundamentals.lab.domain.binding;
 
 import springfundamentals.lab.domain.entity.Role;
 
+import javax.validation.constraints.NotNull;
+
 public class UserBinding {
 
     private String username;
@@ -12,6 +14,7 @@ public class UserBinding {
     public UserBinding() {
     }
 
+    @NotNull
     public String getUsername() {
         return username;
     }

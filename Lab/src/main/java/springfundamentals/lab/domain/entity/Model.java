@@ -18,7 +18,7 @@ public class Model extends BaseEntity {
     public Model() {
     }
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true, nullable = false)
     public String getName() {
         return name;
     }
