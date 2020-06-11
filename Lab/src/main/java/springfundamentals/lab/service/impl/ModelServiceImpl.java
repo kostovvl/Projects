@@ -54,8 +54,10 @@ public class ModelServiceImpl implements ModelService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     @Override
     public void deleteModel(long id) {
+
         this.modelRepository.deleteById(id);
     }
 }

@@ -41,8 +41,9 @@
                 <h4 th:text="${o.getModel()}"></h4>
                <h4 th:text="${o.getYear()}"></h4>
                <h4 th:text="${o.getEngine()}">Engine: ...</h4>
-                <h4><a class="btn-block" th:href="@{/cars/details/{id} (id = ${o.getId()})}">Details</a></h4>
+                <h4><a class="btn-block" th:href="@{/cars/details/id (id = ${o.id})}">Details</a></h4>
             </div>
+            </th:block>>
 
         </div>
     </div>

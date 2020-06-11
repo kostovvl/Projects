@@ -24,17 +24,20 @@ public class CarController {
         this.modelService = modelService;
     }
 
-    @GetMapping("/details/?id")
+    @GetMapping("/details/id")
     public String getSpecificOffer(@RequestParam("id") long id, Model model) {
 
-        OfferGetDto result = this.offerService.findById(id);
+       OfferGetDto result = this.offerService.findById(id);
+        System.out.println();
         model.addAttribute("offer", result);
+        System.out.println();
         return "details";
     }
 
-    @PostMapping("/delete/id")
+    @GetMapping("/delete/id")
     public String deleteCar(@RequestParam("id") long id) {
 
+        System.out.println();
         this.modelService.deleteModel(id);
 
         return "redirect:/";

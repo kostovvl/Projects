@@ -2,6 +2,7 @@ package springfundamentals.lab.domain.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "models")
@@ -14,6 +15,7 @@ public class Model extends BaseEntity {
     private Date created;
     private Date modified;
     private Brand brand;
+    private Set<Offer> offers;
 
     public Model() {
     }
@@ -80,5 +82,15 @@ public class Model extends BaseEntity {
 
     public void setBrand(Brand brand) {
         this.brand = brand;
+    }
+
+    @OneToMany(mappedBy = "model", targetEntity = Offer.class,
+    cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    public Set<Offer> getOffers() {
+        return offers;
+    }
+
+    public void setOffers(Set<Offer> offers) {
+        this.offers = offers;
     }
 }
