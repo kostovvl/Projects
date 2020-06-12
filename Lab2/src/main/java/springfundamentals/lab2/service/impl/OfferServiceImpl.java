@@ -8,6 +8,7 @@ import springfundamentals.lab2.domain.entity.Category;
 import springfundamentals.lab2.domain.entity.Engine;
 import springfundamentals.lab2.domain.entity.Offer;
 import springfundamentals.lab2.domain.entity.Transmission;
+import springfundamentals.lab2.domain.view.OfferView;
 import springfundamentals.lab2.repository.ModelRepository;
 import springfundamentals.lab2.repository.OfferRepository;
 import springfundamentals.lab2.repository.UserRepository;
@@ -50,10 +51,10 @@ public class OfferServiceImpl implements OfferService {
     }
 
     @Override
-    public List<OfferGetDto> getAllOffers() {
+    public List<OfferView> getAllOffers() {
 
         return this.offerRepository.findAll().stream()
-                .map(o -> this.mapper.map(o, OfferGetDto.class))
+                .map(o -> this.mapper.map(o, OfferView.class))
                 .collect(Collectors.toList());
 
     }

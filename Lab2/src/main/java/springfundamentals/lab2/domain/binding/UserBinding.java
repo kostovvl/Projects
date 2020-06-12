@@ -1,6 +1,5 @@
 package springfundamentals.lab2.domain.binding;
 
-import springfundamentals.lab2.domain.entity.Role;
 
 import javax.validation.constraints.NotNull;
 
@@ -9,6 +8,7 @@ public class UserBinding {
     private String username;
     private String firstName;
     private String lastName;
+    private String password;
     private String imageUrl;
 
     public UserBinding() {
@@ -23,6 +23,7 @@ public class UserBinding {
         this.username = username;
     }
 
+    @NotNull
     public String getFirstName() {
         return firstName;
     }
@@ -31,6 +32,7 @@ public class UserBinding {
         this.firstName = firstName;
     }
 
+    @NotNull
     public String getLastName() {
         return lastName;
     }
@@ -45,5 +47,13 @@ public class UserBinding {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
-<head th:replace="fragments/header :: header(Test)">
+<head th:include="fragments/header :: header(title)">
 </head>
 
 <body>
+    
+	<div th:include="fragments/navigation :: navigation"></div>
 
-<div th:include="fragments/navigation :: navigation"></div>>
 
     <div class="container-fluid">
         <h2 class="text-center text-white mt-5">All Offers</h2>
+        <th:block th:each="o : ${offers}">
         <div class="offers row mx-auto d-flex flex-row justify-content-center">
-            <th:block th:each="o : ${offers}">
             <div class="offer card col-sm-6 col-md-3  col-lg-2 m-1 p-0">
-
                 <div class="card-img-top-wrapper">
-
                     <img class="card-img-top" src="/" alt="Car image">
                 </div>
                 <div class="card-body pb-1">
@@ -31,13 +29,13 @@
                 <div class="card-body">
                     <a class="card-link" href="/cars/id">Details</a>
                 </div>
-
             </div>
-            </th:block>>
         </div>
+        </th:block>>
     </div>
 
-    <div th:include="fragments/footer :: footer">
+    <div>
+		<!--    <footer>Create your custom footer :)</footer>-->
 	</div>
 
 </body>

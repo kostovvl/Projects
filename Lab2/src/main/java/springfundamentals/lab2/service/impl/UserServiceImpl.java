@@ -26,13 +26,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void registerUser(UserSetDto userSetDto) throws EntityExistsException {
+    public void registerUser(User user) throws EntityExistsException {
 
-        if (this.userRepository.findByUsername(userSetDto.getUsername()) != null) {
+        if (this.userRepository.findByUsername(user.getUsername()) != null) {
             throw new EntityExistsException();
         }
-
-        User user = this.mapper.map(userSetDto, User.class);
 
         if (this.userRepository.count() == 0) {
             user.setRole(Role.valueOf("ADMIN"));
@@ -53,5 +51,10 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.findAll().stream()
                 .map(u -> this.mapper.map(u, UserGetDto.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return this.userRepository.findByUsername(username);
     }
 }

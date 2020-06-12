@@ -10,6 +10,7 @@ public class User extends BaseEntity {
     private String username;
     private String firstName;
     private String lastName;
+    private String password;
     private boolean active;
     private Role role;
     private String imageUrl;
@@ -89,5 +90,14 @@ public class User extends BaseEntity {
 
     public void setModified(Date modified) {
         this.modified = modified;
+    }
+
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
