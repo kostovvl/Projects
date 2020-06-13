@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="fragments/hrader" ></th:block>>
+</head>
+
+<body>
+
+<div>
+    <th:block th:include="fragments/navigation" ></th:block>
+</div>
+
+    <div class="container">
+        <h2 class="text-center text-white">Register User</h2>
+        <form th:object="${userRegisterBinding}" th:action="@{/users/register}"
+              th:method="POST" class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+            <div class="row">
+                <th:block th:if="${userExists}" >
+                    <p class="errors alert alert-danger">
+                        User exists!
+                    </p>
+                </th:block>
+                <div class="form-group col-md-6 mb-3">
+                    <label for="firstName" class="text-white font-weight-bold">First Name</label>
+                    <input th:field="*{firstName}"  id="firstName" type="text" min="2" max="20" class="form-control"
+                           placeholder="First name" />
+                    <th:block th:each="e : ${#fields.errors('firstName')}">
+                        <p th:text="${e}" class="errors alert alert-danger">
+                            First name is required.
+                        </p>
+                    </th:block>
+
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label for="lastName" class="text-white font-weight-bold">Last Name</label>
+                    <input th:field="*{lastName}" id="lastName" type="text" min="2" max="20" class="form-control"
+                           placeholder="Last name" />
+                    <th:block th:each="e : ${#fields.errors('lastName')}">
+                    <p th:text="${e}" class="errors alert alert-danger">
+                        Last name is required.
+                    </p>
+                    </th:block>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label for="username" class="text-white font-weight-bold">Username</label>
+                    <input th:field="*{username}" id="username" type="text" min="2" max="20" class="form-control"
+                           placeholder="Username" />
+                    <th:block th:each="e : ${#fields.errors('username')}">
+                    <p th:text="${e}" class="errors alert alert-danger">
+                        Username is required.
+                    </p>
+                    </th:block>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label for="password" class="text-white font-weight-bold">Password</label>
+                    <input th:field = "*{password}" id="password" type="text" min="2" max="20" class="form-control"
+                           placeholder="Password" />
+                    <th:block th:each="e : ${#fields.errors('password')}">
+                    <p th:text="${e}" class="errors alert alert-danger">
+                        Password is required.
+                    </p>
+                    </th:block>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-md-4">
+                    <div class="button-holder d-flex">
+                        <input type="submit" class="btn btn-info btn-lg" value="Submit Offer"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div>
+	<!--    <footer>Create your custom footer :)</footer>-->
+	</div>
+	
+</body>
+</html>
