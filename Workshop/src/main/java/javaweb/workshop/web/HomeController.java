@@ -13,4 +13,9 @@ public class HomeController {
        return modelAndView;
     }
 
+    @GetMapping("home")
+    public String hetHome() {
+        return "home";
+    }
+
 }

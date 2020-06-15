@@ -2,8 +2,7 @@ package javaweb.workshop.web;
 
 import javaweb.workshop.domain.binding.LoginUserBinding;
 import javaweb.workshop.domain.binding.RegisterUserBinding;
-import javaweb.workshop.domain.servicemodel.LoginUserServiceModel;
-import javaweb.workshop.domain.servicemodel.SetUserServiceModel;
+import javaweb.workshop.domain.dto.UserDto;
 import javaweb.workshop.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -30,74 +30,68 @@ public class UserController {
     }
 
     @GetMapping("/register")
-    public ModelAndView getRegisterPage(ModelAndView modelAndView) {
-
-        modelAndView.setViewName("/register");
-
-        return modelAndView;
-    }
-
-    @GetMapping("/login")
-    public ModelAndView getLoginPage(ModelAndView modelAndView) {
-
-        modelAndView.setViewName("/login");
-
-        return modelAndView;
+    public String getRegisterPage(@Valid @ModelAttribute("registerUser")
+                                          RegisterUserBinding userBinding, BindingResult bindingResult) {
+        return "register";
     }
 
     @PostMapping("/register")
-    public ModelAndView registerUser(@Valid @ModelAttribute("registerUser")
-                                     RegisterUserBinding registerUserBinding,
-                                     BindingResult bindingResult, ModelAndView modelAndView) {
+    public String registerConfirm(@Valid @ModelAttribute("registerUser")
+                                              RegisterUserBinding userBinding, BindingResult bindingResult,
+                                  RedirectAttributes redirectAttributes) {
+
         if (bindingResult.hasErrors()) {
-            modelAndView.setViewName("/register");
-        } else {
-            if (!registerUserBinding.getPassword().equals(registerUserBinding.getConfirmPassword())) {
-                modelAndView.setViewName("/register");
-            } else {
-                SetUserServiceModel setUserServiceModel = this.mapper.map(registerUserBinding, SetUserServiceModel.class);
-
-                if (this.userService.userExists(setUserServiceModel)) {
-
-                    modelAndView.setViewName("/register");
-
-                } else {
-
-                    this.userService.seedUser(setUserServiceModel);
-                    modelAndView.setViewName("/home");
-
-                }
-
-            }
+            System.out.println();
+            redirectAttributes.addFlashAttribute("registerUser", userBinding);
+            return "redirect:/users/register";
+        }
+        if (!userBinding.getPassword().equals(userBinding.getConfirmPassword())) {
+            redirectAttributes.addFlashAttribute("registerUser", userBinding);
+            redirectAttributes.addFlashAttribute("wrongPassword", true);
+            return "redirect:/users/register";
         }
 
-        return modelAndView;
+        UserDto userDto = this.mapper.map(userBinding, UserDto.class);
+        this.userService.registerUser(userDto);
+
+        return "redirect:/users/login";
+    }
+
+
+    @GetMapping("/login")
+    public String getLoginPage(@Valid @ModelAttribute("loinUser")
+                                          LoginUserBinding loginUserBinding,
+                               BindingResult bindingResult) {
+        return "login";
     }
 
     @PostMapping("/login")
-    public ModelAndView loginUser(@Valid @ModelAttribute("loginUserAttribute")
-                                              LoginUserBinding loginUserBinding,
-                                  BindingResult bindingResult, ModelAndView modelAndView) {
-
+    public String loginConfirm(@Valid @ModelAttribute("loinUser")
+                               LoginUserBinding loginUserBinding,  BindingResult bindingResult,
+                               RedirectAttributes redirectAttributes, HttpSession session) {
         if (bindingResult.hasErrors()) {
-
-            modelAndView.setViewName("/login");
-
-        } else {
-            LoginUserServiceModel loginUserServiceModel = this.mapper.map(loginUserBinding, LoginUserServiceModel.class);
-            if (this.userService.userExists(loginUserServiceModel)) {
-
-                modelAndView.setViewName("/home");
-
-            } else {
-
-                modelAndView.setViewName("/login");
-
-            }
-
+            redirectAttributes.addFlashAttribute("loinUser", loginUserBinding);
+            return "redirect:/users/login";
+        }
+        UserDto userDto = this.userService.findByUsername(loginUserBinding.getUsername());
+        if (userDto == null || !userDto.getPassword().equals(loginUserBinding.getPassword())) {
+            redirectAttributes.addFlashAttribute("wrongCredentials", true);
+            redirectAttributes.addFlashAttribute("loinUser", loginUserBinding);
+            return "redirect:/users/login";
         }
 
-        return modelAndView;
+        session.setAttribute("user", userDto);
+        session.setAttribute("id", userDto.getId());
+
+        return "redirect:/home";
     }
+
+    @GetMapping("/logout")
+    public String logOut(HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
+    }
+
+
 
 }

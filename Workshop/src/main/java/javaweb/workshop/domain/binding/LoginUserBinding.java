@@ -1,6 +1,6 @@
 package javaweb.workshop.domain.binding;
 
-import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Length;
 
 public class LoginUserBinding {
 
@@ -8,10 +8,9 @@ public class LoginUserBinding {
     private String password;
 
     public LoginUserBinding() {
-
     }
 
-    @NotNull
+    @Length(min = 2, message = "Username must be more than 2 characters")
     public String getUsername() {
         return username;
     }
@@ -20,7 +19,7 @@ public class LoginUserBinding {
         this.username = username;
     }
 
-    @NotNull
+    @Length(min = 3, message = "Password must be more than 3 characters")
     public String getPassword() {
         return password;
     }

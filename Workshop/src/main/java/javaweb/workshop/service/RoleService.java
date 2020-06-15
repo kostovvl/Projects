@@ -1,9 +1,9 @@
 package javaweb.workshop.service;
 
-import javaweb.workshop.domain.servicemodel.SetRoleServiceModel;
+import javaweb.workshop.domain.dto.RoleDto;
 
 public interface RoleService {
 
-    public SetRoleServiceModel getRole (String name);
+    RoleDto extractRole(String roleName);
 
 }

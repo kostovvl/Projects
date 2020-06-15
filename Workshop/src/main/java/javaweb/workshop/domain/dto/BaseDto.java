@@ -1,10 +1,10 @@
-package javaweb.workshop.domain.servicemodel;
+package javaweb.workshop.domain.dto;
 
-public abstract class BaseServiceModel {
+public class BaseDto {
 
     private String id;
 
-    public BaseServiceModel() {
+    public BaseDto() {
     }
 
     public String getId() {

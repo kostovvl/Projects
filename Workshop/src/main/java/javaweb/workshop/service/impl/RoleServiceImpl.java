@@ -1,8 +1,8 @@
 
 package javaweb.workshop.service.impl;
 
+import javaweb.workshop.domain.dto.RoleDto;
 import javaweb.workshop.domain.entity.Role;
-import javaweb.workshop.domain.servicemodel.SetRoleServiceModel;
 import javaweb.workshop.repository.RoleRepository;
 import javaweb.workshop.service.RoleService;
 import org.modelmapper.ModelMapper;
@@ -34,9 +34,8 @@ public class RoleServiceImpl implements RoleService {
         }
     }
 
-
     @Override
-    public SetRoleServiceModel getRole(String name) {
-        return this.mapper.map(this.roleRepository.findByName(name), SetRoleServiceModel.class);
+    public RoleDto extractRole(String roleName) {
+        return this.mapper.map(this.roleRepository.findByName(roleName), RoleDto.class);
     }
 }

@@ -3,7 +3,6 @@ package javaweb.workshop.domain.binding;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 public class RegisterUserBinding {
@@ -17,7 +16,6 @@ public class RegisterUserBinding {
     public RegisterUserBinding() {
     }
 
-    @NotNull
     @Length(min = 2, max = 10, message = "Username must be between 2 and 10 characters")
     public String getUsername() {
         return username;
@@ -27,8 +25,7 @@ public class RegisterUserBinding {
         this.username = username;
     }
 
-    @NotNull
-    @Length(min = 3, max = 10, message = "Password must be betweeen 3 and 10 characters")
+    @Length(min = 3, max = 10, message = "Password must be betweeen 3 and 10 characters<")
     public String getPassword() {
         return password;
     }
@@ -37,17 +34,8 @@ public class RegisterUserBinding {
         this.password = password;
     }
 
-    @NotNull
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
-
-    @NotNull
-  //  @Email
+    @Length(min = 1, message = "Enter valid email address")
+    @Email(message = "Enter valid email address")
     public String getEmail() {
         return email;
     }
@@ -56,13 +44,20 @@ public class RegisterUserBinding {
         this.email = email;
     }
 
-    @NotNull
-   // @Pattern(regexp = "https:\\/github\\.com/.+\\/.+\\/")
+    @Pattern(regexp = "https:\\/github\\.com\\/.+\\/+", message = "Enter git address following this pattern")
     public String getGit() {
         return git;
     }
 
     public void setGit(String git) {
         this.git = git;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 }
