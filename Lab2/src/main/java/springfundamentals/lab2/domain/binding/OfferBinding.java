@@ -30,6 +30,7 @@ public class OfferBinding {
         this.description = description;
     }
 
+
     public String getEngine() {
         return engine;
     }
@@ -46,7 +47,7 @@ public class OfferBinding {
         this.imageUrl = imageUrl;
     }
 
-    @NotNull
+
     public int getMileage() {
         return mileage;
     }
@@ -55,7 +56,7 @@ public class OfferBinding {
         this.mileage = mileage;
     }
 
-    @NotNull
+
     public BigDecimal getPrice() {
         return price;
     }
@@ -72,7 +73,7 @@ public class OfferBinding {
         this.transmission = transmission;
     }
 
-    @NotNull
+
     public int getYear() {
         return year;
     }
@@ -89,7 +90,7 @@ public class OfferBinding {
         this.category = category;
     }
 
-    @NotNull
+
     public String getModel() {
         return model;
     }

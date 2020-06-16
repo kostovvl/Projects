@@ -1,5 +1,4 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<th.block>
+<th:block>
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
         <a class="navbar-brand" href="/"><img src="/img/car.png" class="logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -7,7 +6,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div th:object = "${loggedUser}" class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto col-12 justify-content-between">
                 <li class="nav-item">
                     <a class="nav-link" href="/brands">All Brands</a>
@@ -33,12 +32,6 @@
 
                 </li>
                 <li class="nav-item">
-                    <th:block th:if="${loggedUser}">
-                        <div class="form-inline my-2 my-lg-0 border px-3">
-                            <div class="logged-user" th:text="|Welcome ${loggedUser.firstName}|"></div>
-                            <a class="nav-link" href="/users/logout">Logout</a>
-                        </div>
-                    </th:block>>
 
                 </li>
                 <li class="nav-item">
@@ -50,4 +43,4 @@
             </ul>
         </div>
     </nav>
-</th.block>>
+</th:block>

@@ -29,8 +29,10 @@
                     <label class="text-center text-white font-weight-bold" for="model">Model</label>
                     <select th:field = "*{model}"  id="model" class="form-control">
                         <option value="">- Select a model -</option>
-                        <optgroup th:each="m : ${models}" label="Brand name">
+                        <optgroup  label="Brand name">
+                            <th:block th:each="m : ${models}">
                             <option th:text="${m.name}"  th:value="${m.name}"></option>
+                            </th:block>>
                         </optgroup>
                     </select>
                     <th:block th:each="e : ${#fields.errors('model')}">

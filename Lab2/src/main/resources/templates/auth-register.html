@@ -10,9 +10,9 @@
     <th:block th:include="fragments/navigation" ></th:block>
 </div>
 
-    <div class="container">
+    <div th:object="${userRegisterBinding}" class="container">
         <h2 class="text-center text-white">Register User</h2>
-        <form th:object="${userRegisterBinding}" th:action="@{/users/register}"
+        <form  th:action="@{/users/register}"
               th:method="POST" class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
             <div class="row">
                 <th:block th:if="${userExists}" >
