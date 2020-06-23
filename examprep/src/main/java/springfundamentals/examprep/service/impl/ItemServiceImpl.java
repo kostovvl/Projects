@@ -1,7 +1,6 @@
 package springfundamentals.examprep.service.impl;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import springfundamentals.examprep.domain.dto.ItemDto;
 import springfundamentals.examprep.domain.entity.Item;
@@ -20,7 +19,6 @@ public class ItemServiceImpl implements ItemService {
     private final CategoryRepository categoryRepository;
     private final ModelMapper mapper;
 
-    @Autowired
     public ItemServiceImpl(ItemRepository itemRepository, CategoryRepository categoryRepository, ModelMapper mapper) {
         this.itemRepository = itemRepository;
         this.categoryRepository = categoryRepository;
@@ -28,12 +26,12 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public void saveItem(ItemDto itemDto) {
+    public void addItem(ItemDto itemDto) {
+
         Item item = this.mapper.map(itemDto, Item.class);
-        System.out.println();
-        item.setCategory(this.categoryRepository.findByCategoryName(itemDto.getCategory().getName()));
-        System.out.println();
+        item.setCategory(this.categoryRepository.findByName(itemDto.getCategory().getName()));
         this.itemRepository.saveAndFlush(item);
+
     }
 
     @Override
@@ -42,24 +40,27 @@ public class ItemServiceImpl implements ItemService {
         return this.itemRepository.findAll().stream()
                 .map(item -> {
                     ItemView itemView = this.mapper.map(item, ItemView.class);
-                    itemView.setImage(String.format("/img/%s-%s.jpg",
-                            item.getGender(), item.getCategory().getCategoryName().name().toUpperCase()));
+                    itemView.setImage(String.format("/img/%s-%S.jpg", item.getGender(),
+                            item.getCategory().getName().name()));
                     return itemView;
                 }).collect(Collectors.toList());
+
     }
 
     @Override
     public ItemView findById(Long id) {
-        return this.itemRepository.findById(id).map(item -> {
-            ItemView itemView = this.mapper.map(item, ItemView.class);
-            itemView.setImage(String.format("/img/%s-%s.jpg",
-                    item.getGender(), item.getCategory().getCategoryName().name().toUpperCase()));
-            return itemView;
-        }).orElse(null);
+        Item result =  this.itemRepository.findById(id).orElse(null);
+
+        ItemView result1 = this.mapper.map(result, ItemView.class);
+
+        result1.setImage(String.format("/img/%s-%S.jpg", result.getGender(),
+                result.getCategory().getName().name()));
+
+        return result1;
     }
 
     @Override
-    public void deleteBy(Long id) {
+    public void deleteById(Long id) {
         this.itemRepository.deleteById(id);
     }
 }

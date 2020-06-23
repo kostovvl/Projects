@@ -1,24 +1,23 @@
 package springfundamentals.examprep.domain.binding;
 
 import org.hibernate.validator.constraints.Length;
-import springfundamentals.examprep.domain.entity.Category;
 import springfundamentals.examprep.domain.entity.CategoryName;
 
 import javax.validation.constraints.DecimalMin;
 import java.math.BigDecimal;
 
-public class ItemAddBindingModel {
+public class ItemAddBinding {
 
     private String name;
     private String description;
-    private BigDecimal price;
     private CategoryName category;
     private String gender;
+    private BigDecimal price;
 
-    public ItemAddBindingModel() {
+    public ItemAddBinding() {
     }
 
-    @Length(min = 2, message = "Item name length must be more than two characters")
+    @Length(min = 2, message = "Name must be at least 2 characters long")
     public String getName() {
         return name;
     }
@@ -27,7 +26,7 @@ public class ItemAddBindingModel {
         this.name = name;
     }
 
-    @Length(min = 2, message = "Description length must be more than two characters")
+    @Length(min = 2, message = "Description must be at least 2 characters long")
     public String getDescription() {
         return description;
     }
@@ -36,14 +35,6 @@ public class ItemAddBindingModel {
         this.description = description;
     }
 
-    @DecimalMin(value = "0", message = "Incorrect price value")
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
 
     public CategoryName getCategory() {
         return category;
@@ -59,5 +50,14 @@ public class ItemAddBindingModel {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    @DecimalMin(value = "0", message = "Enter valid price!")
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 }

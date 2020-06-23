@@ -10,7 +10,7 @@ public class UserLoginBinding {
     public UserLoginBinding() {
     }
 
-    @Length(min = 2, message = "Username length must be more than two characters!")
+    @Length(min = 2, message = "Username must be more than 2 characters long!")
     public String getUsername() {
         return username;
     }
@@ -19,7 +19,7 @@ public class UserLoginBinding {
         this.username = username;
     }
 
-    @Length(min = 3, message = "Password length must be more than three characters!")
+    @Length(min = 3, message = "Password must be more than 3 characters long!")
     public String getPassword() {
         return password;
     }

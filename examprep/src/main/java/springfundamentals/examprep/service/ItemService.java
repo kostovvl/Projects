@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface ItemService {
 
-    void saveItem(ItemDto itemDto);
+    void addItem(ItemDto itemDto);
     List<ItemView> getAllItems();
     ItemView findById(Long id);
-    void deleteBy(Long id);
+    void deleteById(Long id);
 
 }

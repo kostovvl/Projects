@@ -1,10 +1,8 @@
 package springfundamentals.examprep.domain.dto;
 
-import springfundamentals.examprep.domain.entity.Category;
-
 import java.math.BigDecimal;
 
-public class ItemDto extends BaseDto {
+public class ItemDto extends  BaseDto{
 
     private String name;
     private String description;

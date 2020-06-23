@@ -1,6 +1,6 @@
 package springfundamentals.examprep.domain.dto;
 
-public class BaseDto {
+public abstract class BaseDto {
 
     private long id;
 

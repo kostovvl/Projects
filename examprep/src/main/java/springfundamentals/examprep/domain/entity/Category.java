@@ -6,23 +6,23 @@ import javax.persistence.*;
 @Table(name = "categories")
 public class Category extends BaseEntity {
 
-    private CategoryName categoryName;
+    private CategoryName name;
     private String description;
 
     public Category() {
     }
 
-    public Category(String name) {
-        this.categoryName = CategoryName.valueOf(name);
+    public Category(CategoryName name) {
+        this.name = name;
     }
 
     @Enumerated(EnumType.STRING)
-    public CategoryName getCategoryName() {
-        return categoryName;
+    public CategoryName getName() {
+        return name;
     }
 
-    public void setCategoryName(CategoryName categoryName) {
-        this.categoryName = categoryName;
+    public void setName(CategoryName name) {
+        this.name = name;
     }
 
     @Column(name = "description", columnDefinition = "text")

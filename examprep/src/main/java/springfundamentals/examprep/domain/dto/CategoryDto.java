@@ -2,7 +2,7 @@ package springfundamentals.examprep.domain.dto;
 
 import springfundamentals.examprep.domain.entity.CategoryName;
 
-public class CategoryDto extends BaseDto {
+public class CategoryDto {
 
     private CategoryName name;
     private String description;

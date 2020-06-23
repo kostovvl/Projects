@@ -8,6 +8,6 @@ import springfundamentals.examprep.domain.entity.CategoryName;
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 
-    Category findByCategoryName(CategoryName name);
+    Category findByName(CategoryName name);
 
 }

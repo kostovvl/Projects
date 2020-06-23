@@ -1,17 +1,15 @@
 package springfundamentals.examprep.init;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import springfundamentals.examprep.service.CategoryService;
 
 @Component
-public class DataInitializer implements CommandLineRunner {
+public class InitializeCategories implements CommandLineRunner {
 
     private final CategoryService categoryService;
 
-    @Autowired
-    public DataInitializer(CategoryService categoryService) {
+    public InitializeCategories(CategoryService categoryService) {
         this.categoryService = categoryService;
     }
 

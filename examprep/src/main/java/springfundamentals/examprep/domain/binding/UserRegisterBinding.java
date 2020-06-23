@@ -18,7 +18,7 @@ public class UserRegisterBinding {
     public UserRegisterBinding() {
     }
 
-    @Length(min = 2, message = "Username length must be more than two characters!")
+    @Length(min = 2, message = "Username must be more than 2 characters long!")
     public String getUsername() {
         return username;
     }
@@ -27,8 +27,8 @@ public class UserRegisterBinding {
         this.username = username;
     }
 
-    @Length(min = 1, message =  "Enter valid email address!")
-    @Email(message = "Enter valid email address!")
+    @Length(min = 1, message = "Enter valid email!")
+    @Email(message = "Enter valid email!")
     public String getEmail() {
         return email;
     }
@@ -37,8 +37,7 @@ public class UserRegisterBinding {
         this.email = email;
     }
 
-    @NotNull
-    @DecimalMin(value = "0", message = "Enter correct value!")
+    @DecimalMin(value = "0", message = "Enter valid value!")
     public BigDecimal getBudget() {
         return budget;
     }
@@ -47,7 +46,7 @@ public class UserRegisterBinding {
         this.budget = budget;
     }
 
-    @Length(min = 3, message = "Password length must be more than two characters!")
+    @Length(min = 3, message = "Password length must be more than 3 characters long!")
     public String getPassword() {
         return password;
     }

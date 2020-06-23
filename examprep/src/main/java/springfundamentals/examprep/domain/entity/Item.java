@@ -16,7 +16,7 @@ public class Item extends BaseEntity {
     public Item() {
     }
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, unique = false)
     public String getName() {
         return name;
     }
@@ -52,7 +52,6 @@ public class Item extends BaseEntity {
         this.category = category;
     }
 
-    @Column(name = "gender", nullable = false)
     public String getGender() {
         return gender;
     }
