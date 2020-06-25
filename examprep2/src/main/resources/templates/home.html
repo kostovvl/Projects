@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="fragments/header" ></th:block>
+</head>
+<body>
+<header>
+    <th:block th:include="fragments/nav" ></th:block>
+</header>
+<main>
+    <div th:object="${session.user}" class="text-center mb-3">
+        <h2 class="text-black mt-2" th:text="|Welcome to the arena, *{username}|">Welcome to the arena, #{username}}</h2>
+    </div>
+    <hr class="my-3"/>
+    <div class="container">
+        <div class="row mb-4 d-flex justify-content-around">
+            <div class="col-md-3 d-flex flex-column text-center mb-3" th:each="e : ${heroes}">
+
+                <img th:src="${e.image}" class="img-thumb" width="300" height="300"/>
+                <h3 class="text-white text-center" th:text="${e.heroClass.name()}">Warrior</h3>
+                <a class="btn btn-info mb-2" th:href="@{/heroes/details(id = ${e.id})}">Details</a>
+                <a class="btn btn-danger" th:href="@{/heroes/delete(id = ${e.id})}">Delete</a>
+            </div>
+    </div>
+</main>
+<span style="visibility: hidden">...</span>
+<footer class="footer bg-dark  py-2">
+    <th:block th:include="fragments/footer" ></th:block>
+</footer>
+</body>
+</html>
