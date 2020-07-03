@@ -34,9 +34,7 @@ public class ExerciseController {
     @GetMapping("/add")
     public String getAddPage(@Valid @ModelAttribute("exerciseBinding")
                                          AddExerciseBinding addExerciseBinding, BindingResult bindingResult,
-                             HttpSession session, Model model) {
-        UserDto user = (UserDto) session.getAttribute("user");
-        model.addAttribute("user", user);
+                              Model model) {
         return "exercise-add";
     }
 

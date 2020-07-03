@@ -8,6 +8,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Random;
+
 @Service
 public class HomeworkServiceImpl implements HomeworkService {
 
@@ -24,4 +26,13 @@ public class HomeworkServiceImpl implements HomeworkService {
     public void addHomework(HomeworkDto homeworkDto) {
         this.homeworkRepository.saveAndFlush(this.mapper.map(homeworkDto, Homework.class));
     }
+
+    @Override
+    public HomeworkDto findRandomHomework() {
+
+        return this.homeworkRepository.findWithFewerComments()
+                .map(h -> this.mapper.map(h, HomeworkDto.class))
+                .orElse(null);
+    }
+
 }

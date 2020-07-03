@@ -1,4 +1,4 @@
-<th:block>
+<th:block xmlns:th="http://www.thymeleaf.org">
     <nav class="navbar navbar-expand-xl navbar-light bg-light rounded" >
         <a class="navbar-brand" href="/home">
             <h1 class="tm-site-title mb-0">Judge v2</h1>
@@ -8,15 +8,15 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div th:object = "${user}" class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div th:object = "${session.user}" class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item" >
                     <a class="nav-link" href="#">
-                        <span class="nav-link" th:text ="|Hello ${user.username}|"></span>
+                        <span class="nav-link" th:text ="|Hello *{username}|"></span>
                     </a>
                 </li>
 
-                <th:block th:if = "${user.role.name == 'ADMIN'}">
+                <th:block th:if = "*{role.name == 'ADMIN'}">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                        role="button" data-toggle="dropdown" aria-haspopup="true"

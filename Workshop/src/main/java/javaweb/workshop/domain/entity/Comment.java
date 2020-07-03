@@ -14,6 +14,11 @@ public class Comment extends BaseEntity {
     public Comment() {
     }
 
+    public Comment(String score, String textContent) {
+        this.score = score;
+        this.textContent = textContent;
+    }
+
     @Column(name = "score")
     public String getScore() {
         return score;

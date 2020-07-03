@@ -81,7 +81,6 @@ public class UserController {
         }
 
         session.setAttribute("user", userDto);
-        session.setAttribute("id", userDto.getId());
 
         return "redirect:/home";
     }

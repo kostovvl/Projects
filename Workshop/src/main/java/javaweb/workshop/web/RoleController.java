@@ -39,8 +39,7 @@ public class RoleController {
     }
 
     @PostMapping("/add")
-    public String addRoleConfirm(@RequestParam("username") String username, @RequestParam("role") String role,
-                                 Model model, HttpSession session) {
+    public String addRoleConfirm(@RequestParam("username") String username, @RequestParam("role") String role) {
 
         System.out.println();
         this.userService.changeRole(username, role);

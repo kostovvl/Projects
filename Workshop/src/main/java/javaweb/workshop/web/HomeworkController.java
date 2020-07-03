@@ -1,9 +1,12 @@
 package javaweb.workshop.web;
 
+import javaweb.workshop.domain.binding.AddCommentBinding;
 import javaweb.workshop.domain.binding.AddHomeworkBinding;
+import javaweb.workshop.domain.dto.CommentDto;
 import javaweb.workshop.domain.dto.ExerciseDto;
 import javaweb.workshop.domain.dto.HomeworkDto;
 import javaweb.workshop.domain.dto.UserDto;
+import javaweb.workshop.service.CommentService;
 import javaweb.workshop.service.ExerciseService;
 import javaweb.workshop.service.HomeworkService;
 import javaweb.workshop.service.UserService;
@@ -12,10 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
@@ -31,14 +31,16 @@ public class HomeworkController {
     private final ExerciseService exerciseService;
     private final UserService userService;
     private final HomeworkService homeworkService;
+    private final CommentService commentService;
     private final ModelMapper mapper;
 
     @Autowired
     public HomeworkController(ExerciseService exerciseService, UserService userService,
-                              HomeworkService homeworkService, ModelMapper mapper) {
+                              HomeworkService homeworkService, CommentService commentService, ModelMapper mapper) {
         this.exerciseService = exerciseService;
         this.userService = userService;
         this.homeworkService = homeworkService;
+        this.commentService = commentService;
 
 
         this.mapper = mapper;
@@ -47,9 +49,7 @@ public class HomeworkController {
     @GetMapping("/add")
     public String getAddPage(@Valid @ModelAttribute("homeworkBinding")
                                          AddHomeworkBinding homeworkBinding, BindingResult bindingResult,
-                             HttpSession session, Model model) {
-        UserDto userDto = (UserDto)session.getAttribute("user");
-        model.addAttribute("user", userDto);
+                              Model model) {
 
         List<String> exercises = this.exerciseService.findAllExercises().stream()
                 .map(ExerciseDto::getName).collect(Collectors.toList());
@@ -82,9 +82,46 @@ public class HomeworkController {
     }
 
     @GetMapping("/check")
-    public String getChechPage(HttpSession httpSession, Model model) {
-        UserDto userDto = (UserDto) httpSession.getAttribute("user");
-        model.addAttribute("user", userDto);
+    public String getCheckPage(Model model) {
+        if (model.getAttribute("addComment") == null) {
+            model.addAttribute("addComment", new AddCommentBinding());
+        }
+        if (model.getAttribute("homework") == null) {
+            model.addAttribute("homework", new HomeworkDto());
+        }
         return "homework-check";
+    }
+
+    @GetMapping("/download")
+    public String download(AddCommentBinding addCommentBinding,
+                           RedirectAttributes attributes) {
+
+        HomeworkDto result = this.homeworkService.findRandomHomework();
+        attributes.addFlashAttribute("homework", result);
+        attributes.addFlashAttribute("addComment", addCommentBinding);
+
+        return "redirect:/homework/check";
+    }
+
+    @PostMapping("/comment")
+    public String commentConfirm(@Valid @ModelAttribute("addComment")
+                                 AddCommentBinding addCommentBinding, BindingResult bindingResult,
+                                 RedirectAttributes redirectAttributes) {
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("addComment", addCommentBinding);
+         return "redirect:/homework/check";
+        }
+
+        if (addCommentBinding.getHomeworkId() == null) {
+            redirectAttributes.addFlashAttribute("addComment", addCommentBinding);
+            redirectAttributes.addFlashAttribute("noHomework",true);
+            System.out.println();
+            return "redirect:/homework/check";
+        }
+
+
+        this.commentService.addComment(addCommentBinding);
+        return "redirect:/home";
     }
 }
